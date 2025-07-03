@@ -1,3 +1,4 @@
+
 # Inventory Management System API
 
 Un système de gestion d'inventaire simple et efficace pour les petites entreprises, développé avec Node.js, Express et MongoDB.
@@ -293,3 +294,6 @@ curl -X GET http://localhost:5003/export/products \
 **Note** : Ce projet est conçu pour les petites entreprises ayant besoin d'une solution d'inventaire simple mais efficace. 
 
 ---
+=======
+# Inventory-Management-API-Node.js-Express-MongoDB
+
