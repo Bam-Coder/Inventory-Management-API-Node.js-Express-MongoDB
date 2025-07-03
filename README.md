@@ -1,7 +1,25 @@
 
-# Inventory Management System API
+![Node.js](https://img.shields.io/badge/Node.js-18.x-green)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen)
+![API](https://img.shields.io/badge/API-RESTful-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
+# Inventory Management System API
 Un système de gestion d'inventaire simple et efficace pour les petites entreprises, développé avec Node.js, Express et MongoDB.
+
+## 📖 Sommaire
+
+- [🚀 Fonctionnalités](#-fonctionnalités)
+- [📋 Prérequis](#-prérequis)
+- [🛠️ Installation](#️-installation)
+- [📚 API Endpoints](#-api-endpoints)
+- [🗄️ Structure de la base de données](#️-structure-de-la-base-de-données)
+- [🔒 Sécurité](#-sécurité)
+- [📖 Documentation](#-documentation)
+- [🧪 Tests](#-tests)
+- [📝 Exemple d'utilisation](#-exemple-dutilisation)
+- [🤝 Contribution](#-contribution)
+- [👥 Équipe](#-équipe)
 
 ## 🚀 Fonctionnalités
 
