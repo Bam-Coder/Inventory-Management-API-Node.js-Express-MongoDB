@@ -21,6 +21,12 @@ const productSchema = new mongoose.Schema({
     default: 0,
     min: 0
   },
+  price: {
+     type: Number,
+     required: true,
+     min: 0,
+     default: 0
+  },
   reorderThreshold: {
     type: Number,
     required: true,
@@ -59,7 +65,7 @@ const productSchema = new mongoose.Schema({
 });
 
 // Index pour améliorer les performances
-productSchema.index({ addedBy: 1, isDeleted: 1 });
+productSchema.index({ addedBy: 1, isDeleted: 1 })
 productSchema.index({ name: 'text', description: 'text' });
 
 module.exports = mongoose.model('Product', productSchema);

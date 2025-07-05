@@ -56,6 +56,16 @@ const stockOut = async (req, res) => {
   }
 };
 
+// 📜 Tous les logs de stock de l'utilisateur
+const getAllStockLogs = async (req, res) => {
+  try {
+    const logs = await stockService.getAllStockLogs(req.user._id);
+    res.json({ success: true, data: logs });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 // 📜 Logs pour un produit
 const getStockLogs = async (req, res) => {
   try {
@@ -98,6 +108,7 @@ const adjustStock = async (req, res) => {
 module.exports = {
   stockIn,
   stockOut,
+  getAllStockLogs,
   getStockLogs,
   adjustStock,
 };

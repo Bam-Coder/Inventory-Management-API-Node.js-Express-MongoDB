@@ -68,6 +68,7 @@ const getInventoryStats = async (userId) => {
   const totalProducts = await Product.countDocuments({ addedBy: userId });
   const products = await Product.find({ addedBy: userId });
   const totalQuantity = products.reduce((sum, p) => sum + p.quantity, 0);
+  const totalValue = products.reduce((sum, p) => sum + (p.quantity * (p.price || 0)), 0);
   const lowStockCount = await Product.countDocuments({
     addedBy: userId,
     $expr: { $lte: ["$quantity", "$reorderThreshold"] },
@@ -79,6 +80,7 @@ const getInventoryStats = async (userId) => {
   return {
     totalProducts,
     totalQuantity,
+    totalValue,
     lowStockCount,
     categoryStats
   };

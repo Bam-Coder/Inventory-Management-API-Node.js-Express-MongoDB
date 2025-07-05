@@ -52,6 +52,10 @@ const stockOut = async (productId, quantity, note, userId) => {
   return product;
 };
 
+const getAllStockLogs = async (userId) => {
+  return await StockLog.find({ userId }).sort({ timestamp: -1 });
+};
+
 const getStockLogs = async (productId) => {
   return await StockLog.find({ productId })
     .sort({ timestamp: -1 })
@@ -83,6 +87,7 @@ module.exports = {
   isOutgoing,
   stockIn,
   stockOut,
+  getAllStockLogs,
   getStockLogs,
   adjustStock,
 };

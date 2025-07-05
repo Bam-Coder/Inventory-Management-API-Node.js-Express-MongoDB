@@ -93,7 +93,8 @@ Un système de gestion d'inventaire simple et efficace pour les petites entrepri
 - `POST /stock/in` - Entrée de stock
 - `POST /stock/out` - Sortie de stock
 - `POST /stock/adjust` - Ajustement de stock
-- `GET /stock/logs/:productId` - Historique des mouvements
+- `GET /stock/logs` - Récupère tous les logs de stock 
+- `GET /stock/logs/:productId` - Historique des mouvements d'un produit
 
 > **Notification stock faible** : Lorsqu'une opération de stock fait passer un produit sous le seuil de réapprovisionnement, la réponse API contient un champ `notification` permettant d'afficher une alerte immédiate à l'utilisateur.
 
@@ -205,6 +206,7 @@ Un système de gestion d'inventaire simple et efficace pour les petites entrepri
   name: String,
   description: String,
   quantity: Number,
+  price: Number,
   reorderThreshold: Number,
   unit: String,
   category: String,
@@ -279,6 +281,7 @@ curl -X POST http://localhost:5003/products \
     "name": "Ordinateur portable",
     "description": "Ordinateur portable gaming",
     "quantity": 10,
+    "price": 1000,
     "reorderThreshold": 5,
     "unit": "pièces",
     "category": "Électronique",

@@ -49,6 +49,7 @@ const options = {
             name: { type: 'string', example: 'Ordinateur portable' },
             description: { type: 'string', example: 'Ordinateur portable gaming' },
             quantity: { type: 'number', example: 10 },
+            price: { type: 'number', example: 500 },
             reorderThreshold: { type: 'number', example: 5 },
             unit: { type: 'string', example: 'pièces' },
             category: { type: 'string', example: 'Électronique' },
@@ -394,6 +395,7 @@ const options = {
               content: { 'application/json': { schema: { type: 'object', properties: {
                 totalProducts: { type: 'integer', example: 10 },
                 totalQuantity: { type: 'integer', example: 100 },
+                totalValue: { type: 'number', example: 1000 },
                 lowStockCount: { type: 'integer', example: 2 },
                 categoryStats: { type: 'array', items: { type: 'object', properties: { _id: { type: 'string' }, count: { type: 'integer' } } } }
               } } } }
@@ -584,6 +586,35 @@ const options = {
             200: { description: 'Stock ajusté avec succès', content: { 'application/json': { schema: { $ref: '#/components/schemas/Product' } } } },
             400: { description: 'ID de produit invalide' },
             404: { description: 'Produit introuvable' },
+            401: { $ref: '#/components/responses/Unauthorized' },
+            500: { $ref: '#/components/responses/ServerError' }
+          }
+        }
+      },
+      '/stock/logs': {
+        get: {
+          tags: ['Stock'],
+          summary: 'Récupérer tous les logs de stock de l\'utilisateur connecté',
+          description: 'Retourne tous les logs de stock de l\'utilisateur connecté (authentification requise)',
+          security: [{ bearerAuth: [] }],
+          responses: {
+            200: {
+              description: 'Liste des logs de stock',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      success: { type: 'boolean', example: true },
+                      data: {
+                        type: 'array',
+                        items: { $ref: '#/components/schemas/StockLog' }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             401: { $ref: '#/components/responses/Unauthorized' },
             500: { $ref: '#/components/responses/ServerError' }
           }

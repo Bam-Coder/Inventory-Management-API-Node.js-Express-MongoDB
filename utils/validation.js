@@ -63,6 +63,9 @@ const productValidation = [
   body('quantity')
     .isInt({ min: 0 })
     .withMessage('La quantité doit être un nombre positif'),
+  body('price')
+    .isFloat({ min: 0 })
+    .withMessage('Le prix doit être un nombre positif'),
   body('reorderThreshold')
     .isInt({ min: 0 })
     .withMessage('Le seuil de réapprovisionnement doit être un nombre positif'),
