@@ -60,21 +60,23 @@ const deleteProduct = async (id, user) => {
 const getLowStockProducts = async (userId) => {
   return await Product.find({
     addedBy: userId,
+    isDeleted: false,
     $expr: { $lte: ["$quantity", "$reorderThreshold"] }
   });
 };
 
 const getInventoryStats = async (userId) => {
-  const totalProducts = await Product.countDocuments({ addedBy: userId });
-  const products = await Product.find({ addedBy: userId });
+  const totalProducts = await Product.countDocuments({ addedBy: userId, isDeleted: false });
+  const products = await Product.find({ addedBy: userId , isDeleted: false});
   const totalQuantity = products.reduce((sum, p) => sum + p.quantity, 0);
   const totalValue = products.reduce((sum, p) => sum + (p.quantity * (p.price || 0)), 0);
   const lowStockCount = await Product.countDocuments({
     addedBy: userId,
+    isDeleted: false,
     $expr: { $lte: ["$quantity", "$reorderThreshold"] },
   });
   const categoryStats = await Product.aggregate([
-    { $match: { addedBy: userId } },
+    { $match: { addedBy: userId, isDeleted: false } },
     { $group: { _id: "$category", count: { $sum: 1 } } }
   ]);
   return {
@@ -88,7 +90,7 @@ const getInventoryStats = async (userId) => {
 
 const searchProducts = async (userId, query) => {
   const { name, category, unit, supplier, lowStock, minQty, maxQty } = query;
-  let filter = { addedBy: userId };
+  let filter = { addedBy: userId, isDeleted: false };
   if (name) filter.name = { $regex: name, $options: 'i' };
   if (category) filter.category = category;
   if (unit) filter.unit = unit;
